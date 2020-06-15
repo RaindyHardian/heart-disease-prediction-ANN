@@ -25,13 +25,14 @@ model = tf.keras.models.Sequential([
 adam = tf.keras.optimizers.Adam(lr=0.001)
 model.compile(optimizer=adam,
                 loss='binary_crossentropy',
-                metrics=['accuracy'])
+                metrics=['acc'])
 
 checkpoint_filepath = './best_model/ckpt{epoch}.ckpt'
 checkpoint_dir = os.path.dirname(checkpoint_filepath)
 latest = tf.train.latest_checkpoint(checkpoint_dir)
 print(latest)
 model.load_weights(latest)
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -79,7 +80,7 @@ class Ui_MainWindow(object):
         font.setBold(False)
         font.setWeight(50)
         self.hasil.setFont(font)
-        self.hasil.setStyleSheet("font-size:20px;\n"
+        self.hasil.setStyleSheet("font-size:12px;\n"
 "background-color:orange;")
         self.hasil.setAlignment(QtCore.Qt.AlignCenter)
         self.hasil.setObjectName("hasil")
@@ -604,7 +605,7 @@ class Ui_MainWindow(object):
             thal = 7
         
         # input value ke array
-        arrInput = np.array([age, int(sex), cp, trestbps, chol, fbs, restcg, thalach, exang, oldpeak, slope, ca, thal]).reshape((1,13))
+        arrInput = np.array([float(age), float(sex), float(cp), float(trestbps), float(chol), float(fbs), float(restcg), float(thalach), float(exang), float(oldpeak), float(slope), float(ca), float(thal)]).reshape((1,13))
         print(arrInput) # cetak input di cmd
         print(arrInput.shape) # cetak dimensi array
         
